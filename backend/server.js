@@ -4,12 +4,22 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const connectDB = require('./config/db'); // Importar la conexión a la DB
-
+const path = require("path");
+const dotenv = require("dotenv");
 const authRoutes = require('./routes/authRoutes');
 const bookRoutes = require('./routes/bookRoutes');
 
+// Cargar el .env que está un nivel arriba de la carpeta actual
+dotenv.config({
+  path: path.resolve(__dirname, "../.env")
+});
+
+// Probar que sí carga la variable
+console.log("DB URL:", process.env.DATABASE_URL);
+
 const app = express();
 
+console.log(process.env.DATABASE_URL);
 // Conectar a la base de datos
 connectDB();
 
